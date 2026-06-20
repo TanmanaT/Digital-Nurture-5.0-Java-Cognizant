@@ -1,0 +1,10 @@
+<app-header></app-header>
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- Global loading spinner -->
+<div *ngIf="loadingService.isLoading$ | async" class="global-spinner-overlay">
+  <div class="spinner"></div>
+  <p>Processing Request...</p>
+</div>
