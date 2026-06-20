@@ -1,0 +1,31 @@
+=== Angular Project Files and Purposes ===
+
+1. angular.json:
+   Configures the workspace and project-specific settings for the Angular CLI, including build, test, and serve configurations, assets, and styling libraries.
+
+2. tsconfig.json:
+   Defines the base TypeScript compiler options, path mappings, and project rules for the entire Angular workspace.
+
+3. tsconfig.app.json:
+   Specifies the TypeScript compiler options and configurations tailored specifically for compiling the Angular application code.
+
+4. package.json:
+   Manages the project's metadata, scripts (start, build, test), and both runtime and development npm package dependencies.
+
+5. src/main.ts:
+   The main application entry point that bootstraps the application and starts running the root component or module.
+
+6. src/app/app.config.ts:
+   Defines application-wide configuration options, including providers (like routing), for a standalone-based Angular application.
+
+7. src/app/app.component.ts:
+   The main component class defining the logic, template, and styles for the root component of the application.
+
+8. src/index.html:
+   The single HTML page served by the browser that acts as the entry point layout and hosts the root component (<app-root>).
+
+
+=== Budgets Configuration in angular.json ===
+Budgets configuration restricts bundle sizes during production builds to ensure high performance and prevent code bloat:
+- maximumWarning: The bundle size limit (e.g., 500kb) at which the CLI warns the developer about large bundles during compilation.
+- maximumError: The bundle size limit (e.g., 1mb) at which the CLI will fail the build process, preventing deployment of oversized assets.
