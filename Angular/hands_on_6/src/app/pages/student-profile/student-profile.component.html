@@ -1,0 +1,43 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">JD</div>
+      <div>
+        <h2>John Doe</h2>
+        <p class="email">john.doe@college.edu</p>
+      </div>
+    </div>
+    <div class="profile-details">
+      <div class="detail-row">
+        <span>Student Level:</span>
+        <strong>Undergraduate (Junior)</strong>
+      </div>
+      <div class="detail-row">
+        <span>Cumulative GPA:</span>
+        <strong class="gpa-val">3.80 / 4.00</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="enrolled-courses-section">
+    <h3>My Enrolled Courses</h3>
+    <div *ngIf="enrolledCourses.length === 0" class="no-enrollments">
+      You are not currently enrolled in any academic courses. Browse available courses to enroll.
+    </div>
+    
+    <ul *ngIf="enrolledCourses.length > 0" class="enrolled-list">
+      <li *ngFor="let course of enrolledCourses" class="enrolled-item">
+        <div class="enrolled-info">
+          <span class="enrolled-code">{{ course.code }}</span>
+          <span class="enrolled-title">{{ course.name }}</span>
+        </div>
+        <span class="enrolled-credits">{{ course.credits }} Credits</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Component-level provider demonstration -->
+  <div class="notifications-section">
+    <app-notification></app-notification>
+  </div>
+</div>
