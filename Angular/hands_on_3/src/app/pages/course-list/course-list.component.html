@@ -4,13 +4,29 @@
     <p>Select a course below to request enrollment.</p>
   </header>
 
-  <div class="course-grid">
-    <app-course-card 
-      *ngFor="let c of courses" 
-      [course]="c" 
-      (enrollRequested)="onEnroll($event)">
-    </app-course-card>
+  <!-- Loading state indicator -->
+  <div *ngIf="isLoading; else listContent" class="loading-indicator">
+    <div class="spinner"></div>
+    <p>Loading courses...</p>
   </div>
+
+  <ng-template #listContent>
+    <!-- Check if courses are empty -->
+    <div *ngIf="courses.length > 0; else noCourses" class="course-grid">
+      <app-course-card 
+        *ngFor="let c of courses; trackBy: trackByCourseId" 
+        [course]="c" 
+        (enrollRequested)="onEnroll($event)">
+      </app-course-card>
+    </div>
+  </ng-template>
+
+  <!-- Empty list template fallback -->
+  <ng-template #noCourses>
+    <div class="empty-state">
+      <p>No courses available.</p>
+    </div>
+  </ng-template>
 
   <div *ngIf="selectedCourseId" class="selected-course-info">
     Selected course ID: {{ selectedCourseId }}

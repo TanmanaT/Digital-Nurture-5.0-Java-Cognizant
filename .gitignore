@@ -1,1 +1,4 @@
 Digital-Nurture-JavaFSE
+**/node_modules/
+**/dist/
+.angular/
