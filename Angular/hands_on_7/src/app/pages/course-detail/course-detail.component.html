@@ -1,0 +1,47 @@
+<div class="detail-container">
+  <div *ngIf="course; else notFound" class="detail-card">
+    <header class="detail-header">
+      <span class="detail-code">{{ course.code }}</span>
+      <h2>{{ course.name }}</h2>
+    </header>
+    
+    <div class="detail-body">
+      <div class="detail-info-row">
+        <span>Credits:</span>
+        <strong>{{ course.credits }} Credits</strong>
+      </div>
+      <div class="detail-info-row">
+        <span>Grade Status:</span>
+        <strong [ngClass]="{ 'gpa-val': course.gradeStatus === 'passed', 'danger-val': course.gradeStatus === 'failed' }">
+          {{ course.gradeStatus | uppercase }}
+        </strong>
+      </div>
+      <div class="detail-info-row">
+        <span>Instructor:</span>
+        <strong>Dr. Sarah Jenkins</strong>
+      </div>
+      <div class="detail-info-row">
+        <span>Schedule:</span>
+        <strong>Mon / Wed — 10:00 AM to 11:30 AM</strong>
+      </div>
+      <div class="detail-description">
+        <h3>Course Syllabus & Overview</h3>
+        <p>
+          This course offers a comprehensive deep dive into subject core principles. Students will engage in intensive hands-on lab exercises, study architectural patterns, write automated unit tests, and design scalable architectures to build production-ready applications.
+        </p>
+      </div>
+    </div>
+
+    <footer class="detail-footer">
+      <a routerLink="/courses" class="btn btn-secondary">← Back to Course Catalog</a>
+    </footer>
+  </div>
+
+  <ng-template #notFound>
+    <div class="detail-card error-card">
+      <h2>Course Not Found</h2>
+      <p>The academic course ID you requested does not exist in our catalog database.</p>
+      <a routerLink="/courses" class="btn btn-primary">Back to Catalog</a>
+    </div>
+  </ng-template>
+</div>

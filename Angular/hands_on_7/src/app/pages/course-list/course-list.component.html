@@ -1,0 +1,41 @@
+<div class="course-list-container">
+  <header class="list-header">
+    <h2>Available Academic Courses</h2>
+    <p>Select a course below to request enrollment.</p>
+  </header>
+
+  <!-- Search input text box for query parameter filtering -->
+  <div class="search-container">
+    <input 
+      type="text" 
+      [(ngModel)]="searchTerm" 
+      (input)="onSearch()" 
+      placeholder="Filter courses by name or code..." 
+      class="search-input">
+  </div>
+
+  <!-- Singleton Dependency Injection Demonstration Widget -->
+  <app-course-summary-widget></app-course-summary-widget>
+
+  <!-- Loading state indicator -->
+  <div *ngIf="isLoading; else listContent" class="loading-indicator">
+    <div class="spinner"></div>
+    <p>Loading courses...</p>
+  </div>
+
+  <ng-template #listContent>
+    <div *ngIf="courses.length > 0; else noCourses" class="course-grid">
+      <app-course-card 
+        *ngFor="let c of courses; trackBy: trackByCourseId" 
+        [course]="c" 
+        (enrollRequested)="onEnroll($event)">
+      </app-course-card>
+    </div>
+  </ng-template>
+
+  <ng-template #noCourses>
+    <div class="empty-state">
+      <p>No courses match your search criteria.</p>
+    </div>
+  </ng-template>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseCard } from '../../components/course-card/course-card.component';
 
@@ -30,9 +30,12 @@ export class CourseList implements OnInit {
 
   selectedCourseId: number | null = null;
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     setTimeout(() => {
       this.isLoading = false;
+      this.cdr.detectChanges(); // Force change detection in zoneless mode
     }, 1500);
   }
 
