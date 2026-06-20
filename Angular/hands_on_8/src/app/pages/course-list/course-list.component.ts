@@ -18,6 +18,7 @@ export class CourseList implements OnInit {
   courses: Course[] = [];
   selectedCourseId: number | null = null;
   searchTerm = '';
+  errorMessage = '';
 
   constructor(
     private courseService: CourseService,
@@ -32,29 +33,36 @@ export class CourseList implements OnInit {
       this.searchTerm = params['search'] || '';
       this.loadCourses();
     });
-
-    setTimeout(() => {
-      this.isLoading = false;
-      this.cdr.detectChanges(); // Force change detection in zoneless mode
-    }, 1500);
   }
 
   loadCourses(): void {
-    const allCourses = this.courseService.getCourses();
-    if (this.searchTerm.trim()) {
-      this.courses = allCourses.filter(c => 
-        c.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        c.code.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        c.credits.toString().includes(this.searchTerm.toLowerCase())
-      );
-    } else {
-      this.courses = allCourses;
-    }
-    this.cdr.detectChanges();
+    this.isLoading = true;
+    this.errorMessage = '';
+    
+    // Subscribe to HTTP client getCourses() observable
+    this.courseService.getCourses().subscribe({
+      next: (courses) => {
+        if (this.searchTerm.trim()) {
+          this.courses = courses.filter(c => 
+            c.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            c.code.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            c.credits.toString().includes(this.searchTerm.toLowerCase())
+          );
+        } else {
+          this.courses = courses;
+        }
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.errorMessage = err.message || 'Failed to retrieve courses.';
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   onSearch(): void {
-    // Navigate with query parameters, updating the URL reactively
     this.router.navigate(['/courses'], { queryParams: { search: this.searchTerm } });
   }
 
@@ -63,7 +71,6 @@ export class CourseList implements OnInit {
   }
 
   onEnroll(courseId: number): void {
-    // Navigate to course detail page
     this.router.navigate(['/courses', courseId]);
   }
 }
