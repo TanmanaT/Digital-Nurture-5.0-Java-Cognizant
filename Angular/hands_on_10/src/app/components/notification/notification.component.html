@@ -1,0 +1,12 @@
+<div class="notification-widget">
+  <div class="widget-header">
+    <h4>Notification Feed (Scoped Instance)</h4>
+    <button class="btn btn-secondary btn-sm" (click)="sendAlert()">Trigger Notification</button>
+  </div>
+  
+  <ul class="notification-list">
+    <li *ngFor="let msg of notificationService.getMessages()" class="notification-item">
+      {{ msg }}
+    </li>
+  </ul>
+</div>

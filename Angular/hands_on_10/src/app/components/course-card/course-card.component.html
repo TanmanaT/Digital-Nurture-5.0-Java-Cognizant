@@ -1,0 +1,36 @@
+<div class="course-card" 
+     [ngClass]="cardClasses" 
+     [ngStyle]="{ 'border-left': '6px solid ' + (course.gradeStatus === 'passed' ? 'var(--success)' : course.gradeStatus === 'failed' ? 'var(--danger)' : 'var(--text-muted)') }"
+     [appHighlight]="'rgba(99, 102, 241, 0.12)'">
+  
+  <div class="card-header-row">
+    <span class="course-code">{{ course.code }}</span>
+    
+    <div [ngSwitch]="course.gradeStatus" class="status-badge">
+      <span *ngSwitchCase="'passed'" class="badge badge-success">Passed</span>
+      <span *ngSwitchCase="'failed'" class="badge badge-danger">Failed</span>
+      <span *ngSwitchDefault class="badge badge-pending">Pending</span>
+    </div>
+  </div>
+
+  <div class="course-title">{{ course.name }}</div>
+  
+  <div class="course-credits">{{ course.credits | creditLabel }}</div>
+
+  <div *ngIf="isExpanded" class="expanded-details">
+    <p><strong>Department:</strong> Computer Science & Engineering</p>
+    <p><strong>Instructor:</strong> Prof. Jane Doe</p>
+    <p><strong>Status:</strong> Academic Enrollment Open</p>
+  </div>
+
+  <div class="card-actions">
+    <button class="btn btn-secondary" (click)="toggleExpand()">
+      {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+    </button>
+    <button class="btn" 
+            [ngClass]="isEnrolled ? 'btn-danger' : 'btn-primary'" 
+            (click)="toggleEnroll()">
+      {{ isEnrolled ? 'Unenroll' : 'Enroll' }}
+    </button>
+  </div>
+</div>
