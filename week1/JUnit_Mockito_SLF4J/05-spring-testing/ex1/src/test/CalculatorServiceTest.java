@@ -1,0 +1,12 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorServiceTest {
+    private final CalculatorService calculatorService = new CalculatorService();
+
+    @Test
+    public void testAdd() {
+        int result = calculatorService.add(5, 7);
+        assertEquals(12, result);
+    }
+}
