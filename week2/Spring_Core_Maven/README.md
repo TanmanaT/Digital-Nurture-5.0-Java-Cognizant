@@ -13,3 +13,32 @@ This directory contains exercises focusing on the Spring Framework (IoC, DI, AOP
 7. **[Exercise 7: Implementing Constructor and Setter Injection](./ex7)**: Compare and implement constructor-based and setter-based dependency injection.
 8. **[Exercise 8: Implementing Basic AOP with Spring](./ex8)**: Configure AOP AspectJ auto-proxying and define custom advice methods (Before, After).
 9. **[Exercise 9: Creating a Spring Boot Application](./ex9)**: Create a basic Spring Boot project with Spring Web, JPA, H2 database, and CRUD controllers.
+
+## How to Run the Projects
+
+### Running inside an IDE (VS Code / IntelliJ IDEA)
+1. Open the project root folder.
+2. Open the main class file (e.g., `ex1/src/main/java/com/library/LibraryManagementApplication.java`).
+3. Click the **Run** button (or press `F5` / `Ctrl + F5`) to launch the application context.
+
+### Running via Maven Command Line
+Navigate to the specific exercise directory (e.g., `ex1`):
+```bash
+cd ex1
+```
+
+#### For Core Exercises (ex1 - ex8)
+Compile and execute using the executive plugin:
+```bash
+mvn compile exec:java -Dexec.mainClass="com.library.LibraryManagementApplication"
+```
+
+#### For Spring Boot Exercise (ex9)
+Run the Spring Boot application server:
+```bash
+mvn spring-boot:run
+```
+Once started, the REST API endpoints can be tested at:
+* **Retrieve books**: `GET http://localhost:8080/api/books`
+* **Create book**: `POST http://localhost:8080/api/books`
+
