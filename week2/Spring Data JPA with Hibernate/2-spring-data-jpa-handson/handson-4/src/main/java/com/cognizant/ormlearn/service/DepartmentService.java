@@ -1,0 +1,12 @@
+package com.cognizant.ormlearn.service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.cognizant.ormlearn.model.Department;
+import com.cognizant.ormlearn.repository.DepartmentRepository;
+@Service
+public class DepartmentService {
+    @Autowired private DepartmentRepository departmentRepository;
+    @Transactional(readOnly = true) public Department get(int id) { return departmentRepository.findById(id).orElse(null); }
+    @Transactional public void save(Department dept) { departmentRepository.save(dept); }
+}
