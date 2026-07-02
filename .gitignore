@@ -10,3 +10,4 @@ Digital-Nurture-JavaFSE
 .project
 .settings/
 .factorypath
+.maven/
