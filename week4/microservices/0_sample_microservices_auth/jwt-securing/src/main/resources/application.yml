@@ -1,0 +1,7 @@
+server:
+  port: 8084
+
+spring:
+  security:
+    jwt:
+      secret: "supersecretsupersecretsupersecretkey123!" # 32+ bytes for HMAC-SHA256
